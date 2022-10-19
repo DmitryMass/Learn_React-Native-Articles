@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Navigate from './navigate';
+import { useFonts } from 'expo-font';
+import { StatusBar } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+  const [loaded] = useFonts({
+    'rs-bold': require('./assets/fonts/RobotoSlab-Bold.ttf'),
+    'rs-light': require('./assets/fonts/RobotoSlab-Light.ttf'),
+    'rs-regular': require('./assets/fonts/RobotoSlab-Regular.ttf'),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!loaded) {
+    return null;
+  }
+
+  if (loaded) {
+    return (
+      <>
+        <StatusBar style='auto' />
+        <Navigate />
+      </>
+    );
+  }
+};
+
+export default App;
